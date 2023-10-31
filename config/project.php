@@ -12,6 +12,18 @@ return [
             'title'      => 'English',
             'short_code' => 'en',
         ],
+        [
+            'title'      => 'French',
+            'short_code' => 'fr',
+        ],
+        [
+            'title'      => 'Spanish',
+            'short_code' => 'es',
+        ],
+        [
+            'title'      => 'Portuguese',
+            'short_code' => 'pt',
+        ],
     ],
 
 ];

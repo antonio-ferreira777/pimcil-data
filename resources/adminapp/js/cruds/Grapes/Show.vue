@@ -37,6 +37,23 @@
                           {{ entry.grapes }}
                         </td>
                       </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.grape.fields.synonyms') }}
+                        </td>
+                        <td>
+                          {{ entry.synonyms }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.grape.fields.color') }}
+                        </td>
+                        <td>
+                          <datatable-enum :row="entry" field="color">
+                          </datatable-enum>
+                        </td>
+                      </tr>
                     </tbody>
                   </div>
                 </div>
@@ -51,8 +68,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 
 export default {
+  components: {
+    DatatableEnum
+  },
   data() {
     return {}
   },

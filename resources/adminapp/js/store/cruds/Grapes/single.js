@@ -3,9 +3,14 @@ function initialState() {
     entry: {
       id: null,
       grapes: '',
+      synonyms: '',
+      color: null,
       created_at: '',
       updated_at: '',
       deleted_at: ''
+    },
+    lists: {
+      color: []
     },
     loading: false
   }
@@ -15,6 +20,7 @@ const route = 'grapes'
 
 const getters = {
   entry: state => state.entry,
+  lists: state => state.lists,
   loading: state => state.loading
 }
 
@@ -85,6 +91,12 @@ const actions = {
   setGrapes({ commit }, value) {
     commit('setGrapes', value)
   },
+  setSynonyms({ commit }, value) {
+    commit('setSynonyms', value)
+  },
+  setColor({ commit }, value) {
+    commit('setColor', value)
+  },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
   },
@@ -94,9 +106,15 @@ const actions = {
   setDeletedAt({ commit }, value) {
     commit('setDeletedAt', value)
   },
+  fetchCreateData({ commit }) {
+    axios.get(`${route}/create`).then(response => {
+      commit('setLists', response.data.meta)
+    })
+  },
   fetchEditData({ commit, dispatch }, id) {
     axios.get(`${route}/${id}/edit`).then(response => {
       commit('setEntry', response.data.data)
+      commit('setLists', response.data.meta)
     })
   },
   fetchShowData({ commit, dispatch }, id) {
@@ -116,6 +134,12 @@ const mutations = {
   setGrapes(state, value) {
     state.entry.grapes = value
   },
+  setSynonyms(state, value) {
+    state.entry.synonyms = value
+  },
+  setColor(state, value) {
+    state.entry.color = value
+  },
   setCreatedAt(state, value) {
     state.entry.created_at = value
   },
@@ -124,6 +148,9 @@ const mutations = {
   },
   setDeletedAt(state, value) {
     state.entry.deleted_at = value
+  },
+  setLists(state, lists) {
+    state.lists = lists
   },
   setLoading(state, loading) {
     state.loading = loading

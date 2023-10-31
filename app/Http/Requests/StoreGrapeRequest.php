@@ -6,6 +6,7 @@ use App\Models\Grape;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 
 class StoreGrapeRequest extends FormRequest
 {
@@ -21,6 +22,14 @@ class StoreGrapeRequest extends FormRequest
                 'string',
                 'required',
                 'unique:grapes',
+            ],
+            'synonyms' => [
+                'string',
+                'nullable',
+            ],
+            'color' => [
+                'required',
+                'in:' . implode(',', Arr::pluck(Grape::COLOR_SELECT, 'value')),
             ],
         ];
     }

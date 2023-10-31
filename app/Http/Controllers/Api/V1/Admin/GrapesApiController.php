@@ -34,7 +34,9 @@ class GrapesApiController extends Controller
         abort_if(Gate::denies('grape_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response([
-            'meta' => [],
+            'meta' => [
+                'color' => Grape::COLOR_SELECT,
+            ],
         ]);
     }
 
@@ -60,7 +62,9 @@ class GrapesApiController extends Controller
 
         return response([
             'data' => new GrapeResource($grape),
-            'meta' => [],
+            'meta' => [
+                'color' => Grape::COLOR_SELECT,
+            ],
         ]);
     }
 
