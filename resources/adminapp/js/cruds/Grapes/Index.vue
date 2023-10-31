@@ -72,6 +72,7 @@ import DatatableActions from '@components/Datatables/DatatableActions'
 import TranslatedHeader from '@components/Datatables/TranslatedHeader'
 import HeaderSettings from '@components/Datatables/HeaderSettings'
 import GlobalSearch from '@components/Datatables/GlobalSearch'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 
 export default {
   components: {
@@ -93,6 +94,19 @@ export default {
           field: 'grapes',
           thComp: TranslatedHeader,
           sortable: true
+        },
+        {
+          title: 'cruds.grape.fields.synonyms',
+          field: 'synonyms',
+          thComp: TranslatedHeader,
+          sortable: true
+        },
+        {
+          title: 'cruds.grape.fields.color',
+          field: 'color',
+          thComp: TranslatedHeader,
+          sortable: true,
+          tdComp: DatatableEnum
         },
         {
           title: 'global.actions',

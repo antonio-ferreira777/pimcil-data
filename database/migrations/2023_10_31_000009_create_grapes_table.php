@@ -11,6 +11,8 @@ class CreateGrapesTable extends Migration
         Schema::create('grapes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('grapes')->unique();
+            $table->string('synonyms')->nullable();
+            $table->string('color');
             $table->timestamps();
             $table->softDeletes();
         });

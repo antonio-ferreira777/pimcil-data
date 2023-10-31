@@ -6,6 +6,7 @@ use App\Models\Grape;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 
 class UpdateGrapeRequest extends FormRequest
 {
@@ -21,6 +22,14 @@ class UpdateGrapeRequest extends FormRequest
                 'string',
                 'required',
                 'unique:grapes,grapes,' . request()->route('grape')->id,
+            ],
+            'synonyms' => [
+                'string',
+                'nullable',
+            ],
+            'color' => [
+                'required',
+                'in:' . implode(',', Arr::pluck(Grape::COLOR_SELECT, 'value')),
             ],
         ];
     }

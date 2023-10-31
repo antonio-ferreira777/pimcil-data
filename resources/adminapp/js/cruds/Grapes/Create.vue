@@ -40,6 +40,46 @@
                       required
                     />
                   </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.synonyms,
+                      'is-focused': activeField == 'synonyms'
+                    }"
+                  >
+                    <label class="bmd-label-floating">{{
+                      $t('cruds.grape.fields.synonyms')
+                    }}</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      :value="entry.synonyms"
+                      @input="updateSynonyms"
+                      @focus="focusField('synonyms')"
+                      @blur="clearFocus"
+                    />
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.color,
+                      'is-focused': activeField == 'color'
+                    }"
+                  >
+                    <label class="bmd-label-floating required">{{
+                      $t('cruds.grape.fields.color')
+                    }}</label>
+                    <v-select
+                      name="color"
+                      :key="'color-field'"
+                      :value="entry.color"
+                      :options="lists.color"
+                      :reduce="entry => entry.value"
+                      @input="updateColor"
+                      @search.focus="focusField('color')"
+                      @search.blur="clearFocus"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,15 +111,31 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('GrapesSingle', ['entry', 'loading'])
+    ...mapGetters('GrapesSingle', ['entry', 'loading', 'lists'])
+  },
+  mounted() {
+    this.fetchCreateData()
   },
   beforeDestroy() {
     this.resetState()
   },
   methods: {
-    ...mapActions('GrapesSingle', ['storeData', 'resetState', 'setGrapes']),
+    ...mapActions('GrapesSingle', [
+      'storeData',
+      'resetState',
+      'setGrapes',
+      'setSynonyms',
+      'setColor',
+      'fetchCreateData'
+    ]),
     updateGrapes(e) {
       this.setGrapes(e.target.value)
+    },
+    updateSynonyms(e) {
+      this.setSynonyms(e.target.value)
+    },
+    updateColor(value) {
+      this.setColor(value)
     },
     submitForm() {
       this.storeData()
